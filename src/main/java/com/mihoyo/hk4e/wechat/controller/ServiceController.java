@@ -27,7 +27,7 @@ public class ServiceController {
                     nonce, echostr);
             System.out.println("verifyurl echostr: " + sEchoStr);
             // 验证URL成功，将sEchoStr返回
-            // HttpUtils.SetResponse(sEchoStr);
+//             HttpUtils.SetResponse(sEchoStr);
             return sEchoStr;
         } catch (Exception e) {
             //验证URL失败，错误原因请查看异常
