@@ -1,4 +1,4 @@
-package com.mihoyo.hk4e.wechat.constants;
+package com.mihoyo.hk4e.wechat.dto;
 
 
 public class TokenDto {

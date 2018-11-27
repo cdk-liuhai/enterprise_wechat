@@ -1,7 +1,9 @@
 package com.mihoyo.hk4e.wechat.controller;
 
-import com.mihoyo.hk4e.wechat.constants.Config;
+import com.mihoyo.hk4e.wechat.constants.Tips;
+import com.mihoyo.hk4e.wechat.service.WxCryptService;
 import com.mihoyo.hk4e.wechat.tools.qq.WXBizMsgCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,6 +17,9 @@ import java.io.StringReader;
 @RestController
 public class ServiceController {
 
+    @Autowired
+    private WxCryptService wxCryptService;
+
     @RequestMapping(value = "/verify", method = RequestMethod.GET)
     public String verify(@RequestParam("msg_signature") String msgSignature,
                          @RequestParam("timestamp") String timestamp,
@@ -22,7 +27,10 @@ public class ServiceController {
                          @RequestParam("echostr") String echostr){
 
         try {
-            WXBizMsgCrypt wxcpt = Config.genWxBizMsgCrypt();
+            WXBizMsgCrypt wxcpt = wxCryptService.genWxBizMsgCrypt();
+            if(wxcpt == null){
+                return Tips.TRY_IT_LATER;
+            }
             String sEchoStr = wxcpt.VerifyURL(msgSignature, timestamp,
                     nonce, echostr);
             System.out.println("verifyurl echostr: " + sEchoStr);
@@ -43,7 +51,10 @@ public class ServiceController {
                           @RequestParam("nonce") String nonce,
                           @RequestBody String body){
         try {
-            WXBizMsgCrypt wxcpt = Config.genWxBizMsgCrypt();
+            WXBizMsgCrypt wxcpt = wxCryptService.genWxBizMsgCrypt();
+            if(wxcpt == null){
+                return Tips.TRY_IT_LATER;
+            }
             String sMsg = wxcpt.DecryptMsg(msgSignature, timestamp, nonce, body);
             System.out.println("after decrypt msg: " + sMsg);
             // TODO: 解析出明文xml标签的内容进行处理
