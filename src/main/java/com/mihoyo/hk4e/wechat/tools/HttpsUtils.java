@@ -44,9 +44,6 @@ public class HttpsUtils {
 //        httpGet.setHeader("Accept", "application/xml");
             HttpClient client = getHttpsClient();
             HttpResponse response = client.execute(httpGet);
-            HttpEntity resEntity = response.getEntity();
-            String result = EntityUtils.toString(resEntity, "utf-8");
-            logger.info("result:" + result);
             return response;
         }catch(Exception e){
             logger.error("", e);

@@ -1,14 +1,13 @@
-package com.mihoyo.hk4e.wechat.service;
+package com.mihoyo.hk4e.wechat.service.impl;
 
-import com.mihoyo.hk4e.wechat.dto.TokenDto;
-import com.mihoyo.hk4e.wechat.service.TokenService;
+import com.mihoyo.hk4e.wechat.entity.Token;
 import com.mihoyo.hk4e.wechat.tools.qq.AesException;
 import com.mihoyo.hk4e.wechat.tools.qq.WXBizMsgCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class WxCryptService {
 
     @Autowired
@@ -20,10 +19,10 @@ public class WxCryptService {
 
 
     public WXBizMsgCrypt genWxBizMsgCrypt() throws AesException {
-        TokenDto token = tokenService.getToken();
+        Token token = tokenService.getToken();
         if(token == null){
             return null;
         }
-        return new WXBizMsgCrypt(token.getToken(), encodingAesKey, corpId);
+        return new WXBizMsgCrypt(token.getContent(), encodingAesKey, corpId);
     }
 }
