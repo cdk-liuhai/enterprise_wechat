@@ -2,7 +2,11 @@ package com.mihoyo.hk4e.wechat.controller;
 
 import com.mihoyo.hk4e.wechat.constants.MsgType;
 import com.mihoyo.hk4e.wechat.dto.MessageSender;
+import com.mihoyo.hk4e.wechat.service.FileService;
 import com.mihoyo.hk4e.wechat.service.MessageService;
+//import com.mihoyo.hk4e.wechat.service.SourceService;
+import com.mihoyo.hk4e.wechat.tools.HttpsUtils;
+import com.sun.deploy.net.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +23,18 @@ public class HomeController {
      */
     @RequestMapping("/test")
     public String index(){
-        MessageSender ms = messageService.createOneMessageSender(MsgType.TEXT);
+//        SourceService sourceService = new SourceService();
+//        String content = sourceService.getSource();
+
+        FileService fs = new FileService();
+        String media_id = fs.uploadFile();
+
+        MessageSender ms = messageService.createOneMessageSender(MsgType.FILE);
         ms.addUser("xingyi.song");
-        ms.setContent("测试通讯2——哟啵请接收");
+        ms.setContent(media_id);
+//        ms.setContent(content);
         messageService.sendMessage(ms);
+
         return "Just for test, the wechat platform simulator >_<";
     }
 }

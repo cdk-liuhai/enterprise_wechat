@@ -6,6 +6,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
+import java.io.File;
 import java.util.Map;
 
 public class HttpsUtils {
@@ -55,6 +57,25 @@ public class HttpsUtils {
         try{
             HttpPost httpPost = new HttpPost(buildUrlWithParams(url, params));
             httpPost.setEntity(entity);
+            HttpClient client = getHttpsClient();
+            HttpResponse response = client.execute(httpPost);
+            return response;
+        }catch(Exception e){
+            logger.error("", e);
+        }
+        return null;
+    }
+
+    public static HttpResponse doMultipartPost(String url, Map<String, String> params, String filePath, String fileName){
+        try{
+            HttpPost httpPost = new HttpPost(buildUrlWithParams(url, params));
+
+            File file = new File(filePath);
+            Long fileLength = file.length();
+
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addBinaryBody("name=\"media\"; filename=\""+fileName+"\"; filelength="+fileLength.toString(), file);
+            httpPost.setEntity(builder.build());
             HttpClient client = getHttpsClient();
             HttpResponse response = client.execute(httpPost);
             return response;

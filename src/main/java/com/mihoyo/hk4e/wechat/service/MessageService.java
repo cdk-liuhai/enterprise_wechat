@@ -73,7 +73,7 @@ public class MessageService {
     }
 
     public MessageSender createOneMessageSender(MsgType msgType){
-        MessageSender ms = new MessageSender(MsgType.TEXT, agentId);
+        MessageSender ms = new MessageSender(msgType, agentId);
         return ms;
     }
 }
