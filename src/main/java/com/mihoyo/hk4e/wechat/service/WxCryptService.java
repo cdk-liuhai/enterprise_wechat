@@ -1,4 +1,4 @@
-package com.mihoyo.hk4e.wechat.service.impl;
+package com.mihoyo.hk4e.wechat.service;
 
 import com.mihoyo.hk4e.wechat.entity.Token;
 import com.mihoyo.hk4e.wechat.tools.qq.AesException;

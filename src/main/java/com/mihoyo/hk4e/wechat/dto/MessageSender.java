@@ -15,13 +15,14 @@ public class MessageSender {
     private Set<String> tousers = new HashSet<>();
     private Set<String> topartys = new HashSet<>();
     private Set<String> totags = new HashSet<>();
-    private MsgType type;
-    private int agentId;
+    private final MsgType type;
+    private final int agentId;
     private int safe;
     private String content; //text内容
 
-    public MessageSender(MsgType type) {
+    public MessageSender(MsgType type, int agentId) {
         this.type = type;
+        this.agentId = agentId;
     }
 
     public void addUser(String user){
@@ -64,16 +65,8 @@ public class MessageSender {
         return type;
     }
 
-    public void setType(MsgType type) {
-        this.type = type;
-    }
-
     public int getAgentId() {
         return agentId;
-    }
-
-    public void setAgentId(int agentId) {
-        this.agentId = agentId;
     }
 
     public int getSafe() {

@@ -1,7 +1,7 @@
 package com.mihoyo.hk4e.wechat.controller;
 
 import com.mihoyo.hk4e.wechat.constants.Tips;
-import com.mihoyo.hk4e.wechat.service.impl.WxCryptService;
+import com.mihoyo.hk4e.wechat.service.WxCryptService;
 import com.mihoyo.hk4e.wechat.tools.qq.WXBizMsgCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

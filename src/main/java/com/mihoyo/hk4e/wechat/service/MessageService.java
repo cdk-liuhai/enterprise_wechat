@@ -1,4 +1,4 @@
-package com.mihoyo.hk4e.wechat.service.impl;
+package com.mihoyo.hk4e.wechat.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mihoyo.hk4e.wechat.constants.Constants;
