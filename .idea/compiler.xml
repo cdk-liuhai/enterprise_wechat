@@ -10,8 +10,5 @@
         <module name="wechat" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="wechat" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
