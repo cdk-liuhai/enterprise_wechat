@@ -20,7 +20,7 @@ public class ServiceController {
     @Autowired
     private WxCryptService wxCryptService;
 
-    @RequestMapping(value = "/verify", method = RequestMethod.GET)
+    @RequestMapping(value = "/service", method = RequestMethod.GET)
     public String verify(@RequestParam("msg_signature") String msgSignature,
                          @RequestParam("timestamp") String timestamp,
                          @RequestParam("nonce") String nonce,
