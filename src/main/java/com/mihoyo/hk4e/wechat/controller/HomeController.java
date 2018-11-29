@@ -13,15 +13,13 @@ public class HomeController {
     @Autowired
     private MessageService messageService;
 
-    @Value("${agent.id}")
-    private int agentId;
     /**
      * just test if the service ok
      * @return
      */
     @RequestMapping("/test")
     public String index(){
-        MessageSender ms = new MessageSender(MsgType.TEXT, agentId);
+        MessageSender ms = messageService.createOneMessageSender(MsgType.TEXT);
         ms.addUser("xingyi.song");
         ms.setContent("测试通讯2——哟啵请接收");
         messageService.sendMessage(ms);

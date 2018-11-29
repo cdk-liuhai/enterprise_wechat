@@ -2,6 +2,7 @@ package com.mihoyo.hk4e.wechat.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mihoyo.hk4e.wechat.constants.Constants;
+import com.mihoyo.hk4e.wechat.constants.MsgType;
 import com.mihoyo.hk4e.wechat.dto.MessageSender;
 import com.mihoyo.hk4e.wechat.dto.Result;
 import com.mihoyo.hk4e.wechat.entity.Token;
@@ -28,6 +29,9 @@ public class MessageService {
 
     @Value("${wx.url.message.send}")
     private String wxUrlMessageSend;
+
+    @Value("${agent.id}")
+    private int agentId;
 
     private Logger logger = LoggerFactory.getLogger("MessageService");
 
@@ -66,5 +70,10 @@ public class MessageService {
         }
         result.setCode(Constants.RESULT_STATE_FAIL);
         return result;
+    }
+
+    public MessageSender createOneMessageSender(MsgType msgType){
+        MessageSender ms = new MessageSender(MsgType.TEXT, agentId);
+        return ms;
     }
 }
