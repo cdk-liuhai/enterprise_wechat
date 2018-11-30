@@ -48,6 +48,7 @@ public class TokenService {
             //同时只有一个请求去取token 其他人都fail-fast
             fetchToken();
             optional = tokenRepository.findById(Token.ID);
+            logger.info("use token:" + optional.get().getContent() + " expireDate:" + optional.get().getExpireDate().toString());
             return optional.isPresent() && optional.get().valid() ? optional.get() : null;
         }
         return null;

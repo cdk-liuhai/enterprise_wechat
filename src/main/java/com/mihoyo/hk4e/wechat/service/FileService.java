@@ -30,10 +30,11 @@ public class FileService {
 
         Token token = tokenService.getToken();
         if(token == null){
+            logger.info("upload token is null");
 //            result.setCode(Constants.RESULT_STATE_FAIL);
             return null;
         }
-
+        logger.info("upload start");
         Map<String, String> params = new HashMap<>();
         params.put("access_token", token.getContent());
         params.put("type", fileUploader.getType());
