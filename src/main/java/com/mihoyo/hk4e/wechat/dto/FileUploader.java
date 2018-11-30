@@ -15,7 +15,7 @@ public class FileUploader {
 
         String[] fileNameList = filePath.split("/");
         this.fileName = fileNameList[fileNameList.length - 1];
-        System.out.println(this.fileName);
+//        System.out.println(this.fileName);
     }
 
     public String getType() {

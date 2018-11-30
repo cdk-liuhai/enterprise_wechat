@@ -18,6 +18,9 @@ public class HomeController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private FileService fileService;
+
     /**
      * just test if the service ok
      * @return
@@ -28,8 +31,7 @@ public class HomeController {
 //        String content = sourceService.getSource();
 
         FileUploader fileUploader = new FileUploader("file", "D:/PycharmProjects/mihoyo/test.py");
-        FileService fs = new FileService();
-        String media_id = fs.uploadFile(fileUploader);
+        String media_id = fileService.uploadFile(fileUploader);
 
         MessageSender ms = messageService.createOneMessageSender(MsgType.FILE);
         ms.addUser("xingyi.song");
