@@ -2,6 +2,7 @@ package com.mihoyo.hk4e.wechat.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mihoyo.hk4e.wechat.constants.Constants;
+import com.mihoyo.hk4e.wechat.dto.FileUploader;
 import com.mihoyo.hk4e.wechat.dto.MessageSender;
 import com.mihoyo.hk4e.wechat.dto.Result;
 import com.mihoyo.hk4e.wechat.entity.Token;
@@ -24,7 +25,7 @@ public class FileService {
 
     private Logger logger = LoggerFactory.getLogger("FileService");
 
-    public String uploadFile(){
+    public String uploadFile(FileUploader fileUploader){
 //        Result<Object> result = new Result<>();
 
         Token token = tokenService.getToken();
@@ -35,10 +36,10 @@ public class FileService {
 
         Map<String, String> params = new HashMap<>();
         params.put("access_token", token.getContent());
-        params.put("type", "file");
+        params.put("type", fileUploader.getType());
         try{
-            String filePath = "D:\\PycharmProjects\\mihoyo\\test.py";
-            String fileName = "test.py";
+            String filePath = fileUploader.getFilePath();
+            String fileName = fileUploader.getFileName();
             HttpResponse response = HttpsUtils.doMultipartPost("https://qyapi.weixin.qq.com/cgi-bin/media/upload", params, filePath, fileName);
             if(response != null){
                 JSONObject respJson = JSONObject.parseObject(EntityUtils.toString(response.getEntity()));

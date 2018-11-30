@@ -1,6 +1,7 @@
 package com.mihoyo.hk4e.wechat.controller;
 
 import com.mihoyo.hk4e.wechat.constants.MsgType;
+import com.mihoyo.hk4e.wechat.dto.FileUploader;
 import com.mihoyo.hk4e.wechat.dto.MessageSender;
 import com.mihoyo.hk4e.wechat.service.FileService;
 import com.mihoyo.hk4e.wechat.service.MessageService;
@@ -26,8 +27,9 @@ public class HomeController {
 //        SourceService sourceService = new SourceService();
 //        String content = sourceService.getSource();
 
+        FileUploader fileUploader = new FileUploader("file", "D:/PycharmProjects/mihoyo/test.py");
         FileService fs = new FileService();
-        String media_id = fs.uploadFile();
+        String media_id = fs.uploadFile(fileUploader);
 
         MessageSender ms = messageService.createOneMessageSender(MsgType.FILE);
         ms.addUser("xingyi.song");
