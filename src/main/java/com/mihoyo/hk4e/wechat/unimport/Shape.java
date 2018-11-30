@@ -2,7 +2,7 @@ package com.mihoyo.hk4e.wechat.unimport;
 
 /**
  * 一个枚举类的例子
- * 献给我
+ * 献给我沙雕老婆
  */
 public enum Shape {
     CIRCULAR("圆形"),
