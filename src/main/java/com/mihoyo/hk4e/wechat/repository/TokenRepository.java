@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+@Transactional
 public interface TokenRepository extends JpaRepository<Token, Long>{
 
-    @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("update Token set content = ?1, expireDate = ?2 where id = ?3")
     int updateToken(String content, Date expireDate, Long id);
 }
